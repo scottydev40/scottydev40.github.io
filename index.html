@@ -39,8 +39,7 @@
   nav { border-bottom: 1px solid color-mix(in oklch, var(--border) 50%, transparent); }
   nav .row { display: flex; align-items: center; justify-content: space-between; height: 64px; }
   .brand { display: flex; align-items: center; gap: 10px; }
-  .mark { width: 32px; height: 32px; border-radius: 6px; background: var(--primary); display: grid; place-items: center; }
-  .mark i { width: 15px; height: 15px; border-radius: 3px; background: var(--bg); display: block; }
+  .mark { width: 32px; height: 32px; border-radius: 7px; display: block; }
   .brand span { font-family: var(--mono); font-weight: 500; letter-spacing: -0.01em; }
   .navlinks { display: flex; align-items: center; gap: 24px; }
   .navlinks a.l { font-size: 14px; color: var(--muted-fg); transition: color .15s; }
@@ -140,8 +139,7 @@
   footer { border-top: 1px solid color-mix(in oklch, var(--border) 50%, transparent); padding: 48px 0; }
   footer .row { display: flex; flex-direction: column; align-items: center; gap: 24px; }
   @media (min-width: 768px) { footer .row { flex-direction: row; justify-content: space-between; } }
-  footer .mark { width: 24px; height: 24px; border-radius: 4px; background: var(--card); border: 1px solid var(--border); }
-  footer .mark i { width: 8px; height: 8px; background: color-mix(in oklch, var(--muted-fg) 60%, transparent); }
+  footer .mark { width: 24px; height: 24px; border-radius: 5px; }
   footer .co { font-family: var(--mono); font-size: 14px; color: var(--muted-fg); }
   footer .links { display: flex; gap: 32px; }
   footer .links a { font-family: var(--mono); font-size: 12px; color: var(--muted-fg); transition: .15s; }
@@ -153,7 +151,7 @@
 <nav>
   <div class="wrap row">
     <div class="brand">
-      <span class="mark"><i></i></span>
+      <img class="mark" src="icon.png" alt="">
       <span>Scotty</span>
     </div>
     <div class="navlinks">
@@ -276,7 +274,7 @@ chmod +x Scotty.AppImage
 <footer>
   <div class="wrap row">
     <div class="brand">
-      <span class="mark"><i></i></span>
+      <img class="mark" src="icon.png" alt="">
       <span class="co">Scotty &copy; 2026</span>
     </div>
     <div class="links">
