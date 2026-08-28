@@ -4,115 +4,298 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Scotty, Quick Share for Linux</title>
-<meta name="description" content="Native Google Quick Share for Linux. Send files to nearby Android and ChromeOS devices, on your network or fully off it.">
+<meta name="description" content="Native Google Quick Share for the Linux desktop. Send files to nearby Android and ChromeOS devices, on your network or fully off it.">
+<meta property="og:title" content="Scotty, Native Quick Share for Linux">
+<meta property="og:description" content="Send files to nearby Android and ChromeOS devices. Native, fast, no accounts, and it works even off the network.">
+<meta property="og:type" content="website">
 <link rel="icon" href="icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #ffffff; --text: #16181d; --muted: #6b7280; --line: #e6e8ec;
-    --accent: #2f6df6; --code-bg: #0f1115; --code-fg: #e8eaf0;
-  }
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --bg: #0d0f13; --text: #edeef2; --muted: #9aa0ac; --line: #23262d;
-      --accent: #6d9bff; --code-bg: #06070a; --code-fg: #e8eaf0;
-    }
+    --bg: oklch(0.141 0.005 285.823);
+    --fg: oklch(0.872 0.008 286.036);
+    --card: oklch(0.21 0.006 285.885);
+    --primary: oklch(0.702 0.183 49.7);
+    --primary-fg: oklch(0.141 0.005 285.823);
+    --muted: oklch(0.274 0.006 286.033);
+    --muted-fg: oklch(0.675 0.012 286.04);
+    --border: oklch(0.274 0.006 286.033);
+    --sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+    --radius: 0.5rem;
   }
   * { box-sizing: border-box; }
-  body {
-    margin: 0; background: var(--bg); color: var(--text);
-    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-  }
-  .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
-  a { color: var(--accent); text-decoration: none; }
-  a:hover { text-decoration: underline; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.6 var(--sans); -webkit-font-smoothing: antialiased; }
+  ::selection { background: color-mix(in oklch, var(--primary) 30%, transparent); }
+  a { color: inherit; text-decoration: none; }
+  .wrap { max-width: 1152px; margin: 0 auto; padding: 0 24px; }
+  .mono { font-family: var(--mono); }
+  .muted { color: var(--muted-fg); }
 
-  header { padding: 96px 0 8px; }
-  .logo { width: 64px; height: 64px; border-radius: 15px; }
-  h1 { font-size: 2rem; margin: 24px 0 10px; letter-spacing: -0.02em; }
-  .tag { font-size: 1.15rem; color: var(--muted); margin: 0; }
+  /* Nav */
+  nav { border-bottom: 1px solid color-mix(in oklch, var(--border) 50%, transparent); }
+  nav .row { display: flex; align-items: center; justify-content: space-between; height: 64px; }
+  .brand { display: flex; align-items: center; gap: 10px; }
+  .mark { width: 32px; height: 32px; border-radius: 6px; background: var(--primary); display: grid; place-items: center; }
+  .mark i { width: 15px; height: 15px; border-radius: 3px; background: var(--bg); display: block; }
+  .brand span { font-family: var(--mono); font-weight: 500; letter-spacing: -0.01em; }
+  .navlinks { display: flex; align-items: center; gap: 24px; }
+  .navlinks a.l { font-size: 14px; color: var(--muted-fg); transition: color .15s; }
+  .navlinks a.l:hover { color: var(--primary); }
+  .ver { font-size: 14px; border: 1px solid var(--border); background: var(--card); border-radius: 6px; padding: 6px 16px; color: var(--fg); }
 
-  section { padding: 40px 0; border-top: 1px solid var(--line); margin-top: 40px; }
-  section:first-of-type { border-top: 0; margin-top: 0; }
-  h2 { font-size: 1.1rem; margin: 0 0 14px; letter-spacing: -0.01em; }
-  p { margin: 0 0 14px; }
-  .muted { color: var(--muted); }
-  ul { margin: 0; padding-left: 20px; }
-  li { margin: 6px 0; }
+  /* Hero */
+  .hero { padding: 96px 0; }
+  .herogrid { display: grid; grid-template-columns: 1fr; gap: 48px; align-items: center; }
+  @media (min-width: 1024px) { .herogrid { grid-template-columns: 5fr 7fr; } }
+  h1 { font-size: clamp(2.25rem, 5vw, 3.75rem); font-weight: 600; line-height: 1.08; letter-spacing: -0.02em; margin: 0 0 24px; }
+  .lede { font-size: 1.125rem; line-height: 1.6; color: var(--muted-fg); max-width: 40ch; margin: 0 0 32px; }
+  .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 32px; }
+  .btn { border-radius: 6px; padding: 10px 24px; font-size: 14px; font-weight: 500; border: 1px solid var(--border); cursor: pointer; transition: .15s; display: inline-flex; align-items: center; }
+  .btn.pri { background: var(--primary); color: var(--primary-fg); border-color: var(--primary); }
+  .btn.pri:hover { filter: brightness(1.08); }
+  .btn.sec { background: var(--card); color: var(--fg); }
+  .btn.sec:hover { border-color: color-mix(in oklch, var(--muted-fg) 40%, transparent); }
+  .avail { display: flex; align-items: center; gap: 16px; opacity: .6; }
+  .avail .k { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .15em; color: var(--muted-fg); }
+  .avail .f { display: flex; gap: 12px; }
+  .avail .f span { font-family: var(--mono); font-size: 12px; color: color-mix(in oklch, var(--fg) 80%, transparent); }
 
-  ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; }
-  ol.steps > li { counter-increment: s; margin: 0 0 18px; padding: 0; }
-  ol.steps > li .lbl { font-weight: 600; }
-  ol.steps > li .lbl::before { content: counter(s) ". "; color: var(--muted); font-weight: 400; }
-  pre {
-    background: var(--code-bg); color: var(--code-fg); border-radius: 10px; padding: 14px 16px;
-    overflow-x: auto; margin: 8px 0 0; font: 13.5px/1.55 "SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
-  }
-  code { font-family: "SF Mono","JetBrains Mono",Menlo,Consolas,monospace; font-size: .92em; }
+  /* Mockup */
+  .mock { border-radius: 12px; background: var(--card); border: 1px solid var(--border); overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,.5); }
+  .mockbar { display: flex; align-items: center; justify-content: space-between; padding: 12px 16px; border-bottom: 1px solid color-mix(in oklch, var(--border) 50%, transparent); background: color-mix(in oklch, var(--muted) 50%, transparent); }
+  .mockbar .dots { display: flex; gap: 6px; }
+  .mockbar .dots i { width: 12px; height: 12px; border-radius: 50%; background: color-mix(in oklch, var(--muted-fg) 40%, transparent); }
+  .mockbar .cap { font-family: var(--mono); font-size: 12px; text-transform: uppercase; letter-spacing: -0.02em; color: var(--muted-fg); }
+  .mockbar .sp { width: 32px; }
+  .mockbody { padding: 24px; }
+  .xfer { display: flex; align-items: center; justify-content: space-between; border: 1px solid var(--border); background: var(--bg); border-radius: 8px; padding: 12px; }
+  .xfer .l { display: flex; align-items: center; gap: 12px; }
+  .xfer .ic { width: 40px; height: 40px; border-radius: 6px; border: 1px solid color-mix(in oklch, var(--primary) 20%, transparent); background: color-mix(in oklch, var(--primary) 10%, transparent); display: grid; place-items: center; }
+  .xfer .ic i { width: 16px; height: 16px; background: var(--primary); display: block; }
+  .xfer .fn { font-size: 14px; font-weight: 500; color: color-mix(in oklch, var(--fg) 90%, transparent); }
+  .xfer .fs { font-family: var(--mono); font-size: 10px; text-transform: uppercase; color: var(--muted-fg); margin-top: 2px; }
+  .xfer .pc { font-family: var(--mono); font-size: 12px; color: var(--primary); }
+  .track { height: 4px; width: 100%; background: var(--muted); border-radius: 999px; overflow: hidden; margin: 16px 0; }
+  .track i { display: block; height: 100%; width: 68%; background: var(--primary); }
+  .tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 32px; }
+  .tile { aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; border: 1px solid var(--border); border-radius: 6px; background: color-mix(in oklch, var(--muted) 30%, transparent); }
+  .tile.dash { border-style: dashed; background: transparent; }
+  .tile .d { width: 8px; height: 8px; border-radius: 50%; }
+  .tile.on .d { background: color-mix(in oklch, var(--muted-fg) 60%, transparent); }
+  .tile.live .d { background: var(--primary); animation: pulse 2s infinite; }
+  @keyframes pulse { 50% { opacity: .4; } }
+  .tile .t { font-family: var(--mono); font-size: 10px; color: var(--muted-fg); }
+  .tile.live .t { color: color-mix(in oklch, var(--fg) 80%, transparent); }
 
-  table { width: 100%; border-collapse: collapse; font-size: .95rem; }
-  th, td { text-align: left; padding: 10px 10px 10px 0; border-bottom: 1px solid var(--line); }
-  td.c, th.c { text-align: center; padding: 10px 6px; }
-  .yes { color: var(--accent); font-weight: 700; }
-  .tblwrap { overflow-x: auto; }
+  /* Features */
+  .features { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: color-mix(in oklch, var(--card) 20%, transparent); padding: 96px 0; }
+  .fgrid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+  @media (min-width: 640px) { .fgrid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1024px) { .fgrid { grid-template-columns: repeat(3, 1fr); } }
+  .fcard { background: var(--bg); border: 1px solid var(--border); border-radius: 8px; padding: 32px; }
+  .fcard h3 { font-size: 16px; font-weight: 500; margin: 0 0 12px; }
+  .fcard p { font-size: 14px; line-height: 1.6; color: var(--muted-fg); margin: 0; max-width: 56ch; }
 
-  footer { padding: 48px 0 72px; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); margin-top: 40px; }
-  footer p { margin: 6px 0; }
+  /* Install */
+  .install { padding: 96px 0; }
+  .install .box { max-width: 768px; margin: 0 auto; }
+  .install h2 { font-size: 1.875rem; font-weight: 500; text-align: center; margin: 0 0 48px; }
+  .method { border-radius: 8px; background: var(--card); border: 1px solid var(--border); overflow: hidden; margin-bottom: 24px; }
+  .mhead { display: flex; align-items: center; justify-content: space-between; padding: 8px 16px; border-bottom: 1px solid var(--border); background: color-mix(in oklch, var(--muted) 50%, transparent); }
+  .mhead .ml { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .15em; color: var(--muted-fg); }
+  .copy { font-family: var(--mono); font-size: 10px; color: var(--primary); background: none; border: 0; cursor: pointer; transition: .15s; }
+  .copy:hover { opacity: .8; }
+  .method .code { padding: 16px; font-family: var(--mono); font-size: 14px; overflow-x: auto; }
+  .method .code div { white-space: pre; }
+  .method .code .p { color: var(--muted-fg); }
+  .instnote { max-width: 768px; margin: 24px auto 0; font-size: 13px; color: var(--muted-fg); text-align: center; }
+  .instnote a { color: var(--primary); }
+
+  /* FAQ */
+  .faq { border-top: 1px solid var(--border); padding: 96px 0; }
+  .faq .box { max-width: 768px; margin: 0 auto; }
+  .faq h2 { font-size: 1.5rem; font-weight: 500; margin: 0 0 32px; }
+  .qa > div { margin-bottom: 32px; }
+  .qa h4 { font-size: 16px; font-weight: 500; margin: 0 0 8px; }
+  .qa p { font-size: 14px; line-height: 1.6; color: var(--muted-fg); margin: 0; max-width: 56ch; }
+
+  /* Compare */
+  .compare { border-top: 1px solid var(--border); padding: 96px 0; }
+  .compare h2 { font-size: 1.5rem; font-weight: 500; margin: 0 0 32px; text-align: center; }
+  .tblwrap { max-width: 768px; margin: 0 auto; border: 1px solid var(--border); border-radius: 8px; overflow-x: auto; }
+  table { width: 100%; border-collapse: collapse; font-size: 14px; min-width: 560px; }
+  th, td { padding: 14px 16px; border-bottom: 1px solid var(--border); text-align: left; }
+  tr:last-child td { border-bottom: 0; }
+  td.c, th.c { text-align: center; }
+  thead th { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted-fg); font-weight: 400; }
+  thead th.me { color: var(--primary); }
+  .yes { color: var(--primary); font-weight: 500; }
+  .no { color: var(--muted-fg); }
+
+  /* Footer */
+  footer { border-top: 1px solid color-mix(in oklch, var(--border) 50%, transparent); padding: 48px 0; }
+  footer .row { display: flex; flex-direction: column; align-items: center; gap: 24px; }
+  @media (min-width: 768px) { footer .row { flex-direction: row; justify-content: space-between; } }
+  footer .mark { width: 24px; height: 24px; border-radius: 4px; background: var(--card); border: 1px solid var(--border); }
+  footer .mark i { width: 8px; height: 8px; background: color-mix(in oklch, var(--muted-fg) 60%, transparent); }
+  footer .co { font-family: var(--mono); font-size: 14px; color: var(--muted-fg); }
+  footer .links { display: flex; gap: 32px; }
+  footer .links a { font-family: var(--mono); font-size: 12px; color: var(--muted-fg); transition: .15s; }
+  footer .links a:hover { color: var(--primary); }
 </style>
 </head>
 <body>
-<div class="wrap">
 
-  <header>
-    <img class="logo" src="icon.png" alt="Scotty">
-    <h1>Scotty</h1>
-    <p class="tag">Native Google Quick Share for Linux.</p>
-  </header>
-
-  <section>
-    <p>Send and receive files with nearby Android and ChromeOS devices, using the sharing that is already built into them. No app on the other device, no account, no cloud.</p>
-    <p>What sets it apart: transfers work even with no shared Wi-Fi, and even with the phone's Wi-Fi switched off. Scotty reaches the phone over Bluetooth, opens a direct link, moves the files, and leaves your internet connection untouched throughout.</p>
-  </section>
-
-  <section>
-    <h2>Install with Flatpak</h2>
-    <ol class="steps">
-      <li><span class="lbl">Add the repository</span>
-        <pre>flatpak remote-add --if-not-exists scotty \
-  https://scottydev40.github.io/scotty.flatpakrepo</pre>
-      </li>
-      <li><span class="lbl">Install</span>
-        <pre>flatpak install scotty dev.scotty.Scotty</pre>
-      </li>
-      <li><span class="lbl">Run</span>
-        <pre>flatpak run dev.scotty.Scotty</pre>
-      </li>
-    </ol>
-    <p class="muted" style="margin-top:16px">Updates arrive automatically through <code>flatpak update</code>. The KDE runtime comes from Flathub, so <a href="https://flatpak.org/setup/">set that up first</a> if you have not. A self-updating AppImage is on the <a href="https://github.com/scottydev40/Scotty/releases">releases page</a> if you prefer a single file.</p>
-  </section>
-
-  <section>
-    <h2>Compared to the alternatives</h2>
-    <div class="tblwrap">
-    <table>
-      <thead>
-        <tr><th>&nbsp;</th><th class="c">Scotty</th><th class="c">Packet</th><th class="c">rquickshare</th><th class="c">LocalSend</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>Google Quick Share</td><td class="c yes">Yes</td><td class="c">Yes</td><td class="c">Yes</td><td class="c muted">No</td></tr>
-        <tr><td>No app on the phone</td><td class="c yes">Yes</td><td class="c">Yes</td><td class="c">Yes</td><td class="c muted">No</td></tr>
-        <tr><td>Works with no shared Wi-Fi</td><td class="c yes">Yes</td><td class="c muted">No</td><td class="c muted">No</td><td class="c muted">No</td></tr>
-        <tr><td>Internet stays up mid-transfer</td><td class="c yes">Yes</td><td class="c muted">No</td><td class="c muted">No</td><td class="c muted">No</td></tr>
-      </tbody>
-    </table>
+<nav>
+  <div class="wrap row">
+    <div class="brand">
+      <span class="mark"><i></i></span>
+      <span>Scotty</span>
     </div>
-  </section>
+    <div class="navlinks">
+      <a class="l" href="https://github.com/scottydev40/Scotty#readme">Docs</a>
+      <a class="l" href="https://github.com/scottydev40/Scotty">GitHub</a>
+      <span class="ver">v0.1.0-beta.1</span>
+    </div>
+  </div>
+</nav>
 
-  <footer>
-    <p>Source: <a href="https://github.com/scottydev40/Scotty">github.com/scottydev40/Scotty</a></p>
-    <p>An independent project, not affiliated with or endorsed by Google.</p>
-  </footer>
+<section class="hero">
+  <div class="wrap herogrid">
+    <div>
+      <h1>Native Quick Share for the Linux Desktop</h1>
+      <p class="lede">Send files between your Linux PC and Android or ChromeOS devices using Google's native protocol. No accounts, no cloud. And it works even when there is no shared Wi-Fi at all.</p>
+      <div class="cta">
+        <a class="btn pri" href="#install">Install for Linux</a>
+        <a class="btn sec" href="https://github.com/scottydev40/Scotty">Source Code</a>
+      </div>
+      <div class="avail">
+        <span class="k">Available as</span>
+        <div class="f"><span>Flatpak</span><span>AppImage</span></div>
+      </div>
+    </div>
 
-</div>
+    <div>
+      <div class="mock" aria-hidden="true">
+        <div class="mockbar">
+          <div class="dots"><i></i><i></i><i></i></div>
+          <div class="cap">Scotty &mdash; Ready to share</div>
+          <div class="sp"></div>
+        </div>
+        <div class="mockbody">
+          <div class="xfer">
+            <div class="l">
+              <div class="ic"><i></i></div>
+              <div>
+                <div class="fn">video.mp4</div>
+                <div class="fs">712 MB &bull; Sending, off network</div>
+              </div>
+            </div>
+            <div class="pc">68%</div>
+          </div>
+          <div class="track"><i></i></div>
+          <div class="tiles">
+            <div class="tile on"><div class="d"></div><div class="t">Android phone</div></div>
+            <div class="tile live"><div class="d"></div><div class="t">Chromebook</div></div>
+            <div class="tile dash"><div class="t">Searching...</div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features" class="features">
+  <div class="wrap">
+    <div class="fgrid">
+      <div class="fcard"><h3>Native Quick Share</h3><p>Speaks Google's Quick Share protocol, so it talks to the sharing built into every modern Android and ChromeOS device. Nothing to install on the other end.</p></div>
+      <div class="fcard"><h3>Works off the network</h3><p>The one thing no other Linux client does: send when there is no shared Wi-Fi, even with the phone's Wi-Fi switched off. Scotty reaches it over Bluetooth and opens a direct link.</p></div>
+      <div class="fcard"><h3>Your internet stays up</h3><p>The transfer does not take over your Wi-Fi radio, so your connection keeps working the whole time and returns exactly as it was.</p></div>
+      <div class="fcard"><h3>Lives in your tray</h3><p>Tucked into the system tray. One click to toggle who can see you, or to accept an incoming transfer the moment it arrives.</p></div>
+      <div class="fcard"><h3>Locked-screen receive</h3><p>Files land even when your screen is locked, with your certificates in place, so you never miss a transfer because you stepped away.</p></div>
+      <div class="fcard"><h3>Scan to send</h3><p>A built-in QR code lets any phone send files straight to you, with no Scotty and no setup needed on the other side.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="install" class="install">
+  <div class="wrap">
+    <div class="box">
+      <h2>Install Scotty</h2>
+      <div class="method">
+        <div class="mhead"><span class="ml">Flatpak &mdash; auto-updating</span><button class="copy" data-copy="flatpak remote-add --if-not-exists scotty https://scottydev40.github.io/scotty.flatpakrepo
+flatpak install scotty dev.scotty.Scotty">Copy</button></div>
+        <div class="code"><div><span class="p">$ </span>flatpak remote-add --if-not-exists scotty https://scottydev40.github.io/scotty.flatpakrepo</div><div><span class="p">$ </span>flatpak install scotty dev.scotty.Scotty</div></div>
+      </div>
+      <div class="method">
+        <div class="mhead"><span class="ml">AppImage</span><button class="copy" data-copy="wget -O Scotty.AppImage https://github.com/scottydev40/Scotty/releases/latest/download/Scotty-x86_64.AppImage
+chmod +x Scotty.AppImage
+./Scotty.AppImage">Copy</button></div>
+        <div class="code"><div><span class="p">$ </span>wget -O Scotty.AppImage https://github.com/scottydev40/Scotty/releases/latest/download/Scotty-x86_64.AppImage</div><div><span class="p">$ </span>chmod +x Scotty.AppImage</div><div><span class="p">$ </span>./Scotty.AppImage</div></div>
+      </div>
+    </div>
+    <p class="instnote">The Flatpak pulls its KDE runtime from Flathub, so <a href="https://flatpak.org/setup/">set Flathub up first</a> if you have not. New versions then arrive on their own through <code>flatpak update</code>.</p>
+  </div>
+</section>
+
+<section id="compare" class="compare">
+  <div class="wrap">
+    <h2>The one that works off the network</h2>
+    <div class="tblwrap">
+      <table>
+        <thead><tr><th>&nbsp;</th><th class="c me">Scotty</th><th class="c">Packet</th><th class="c">rquickshare</th><th class="c">LocalSend</th></tr></thead>
+        <tbody>
+          <tr><td>Google Quick Share protocol</td><td class="c yes">Yes</td><td class="c">Yes</td><td class="c">Yes</td><td class="c no">No</td></tr>
+          <tr><td>No app needed on the phone</td><td class="c yes">Yes</td><td class="c">Yes</td><td class="c">Yes</td><td class="c no">No</td></tr>
+          <tr><td>Works with no shared Wi-Fi</td><td class="c yes">Yes</td><td class="c no">No</td><td class="c no">No</td><td class="c no">No</td></tr>
+          <tr><td>Internet stays up mid-transfer</td><td class="c yes">Yes</td><td class="c no">No</td><td class="c no">No</td><td class="c no">No</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="faq">
+  <div class="wrap">
+    <div class="box">
+      <h2>Common Questions</h2>
+      <div class="qa">
+        <div><h4>Does this work with iPhone?</h4><p>No. Scotty speaks Google Quick Share, the Android and ChromeOS standard. iPhones use AirDrop, a separate protocol, so they are not supported today.</p></div>
+        <div><h4>Which desktop environments are supported?</h4><p>It is built and tested on GNOME and KDE Plasma, but Scotty is a standalone Qt application and runs on any X11 or Wayland based compositor.</p></div>
+        <div><h4>Do my files go through a server?</h4><p>No. Transfers happen directly between the two devices over your local radios. The optional account feature, for sending to your own signed-in devices, talks to Google's servers; everything else is fully local.</p></div>
+        <div><h4>How do I get updates?</h4><p>The Flatpak updates automatically through <code>flatpak update</code> and your software centre. The AppImage checks for and installs updates from inside the app.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap row">
+    <div class="brand">
+      <span class="mark"><i></i></span>
+      <span class="co">Scotty &copy; 2026</span>
+    </div>
+    <div class="links">
+      <a href="https://github.com/scottydev40/Scotty">GITHUB</a>
+      <a href="https://github.com/scottydev40/Scotty/blob/main/LICENSE">LICENSE</a>
+      <a href="https://github.com/scottydev40/Scotty/releases">RELEASES</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.querySelectorAll('.copy').forEach(function (b) {
+    b.addEventListener('click', function () {
+      navigator.clipboard.writeText(b.dataset.copy).then(function () {
+        var o = b.textContent; b.textContent = 'Copied'; b.classList.add('done');
+        setTimeout(function () { b.textContent = o; }, 1500);
+      }).catch(function(){});
+    });
+  });
+</script>
 </body>
 </html>
