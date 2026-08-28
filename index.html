@@ -40,7 +40,7 @@
   nav .row { display: flex; align-items: center; justify-content: space-between; height: 100px; }
   .brand { display: flex; align-items: center; gap: 15px; }
   .mark { width: 50px; height: 50px; border-radius: 12px; display: block; }
-  .wordmark { height: 50px; display: block; }
+  .wordmark { height: 60px; display: block; }
   .brand span { font-family: var(--mono); font-weight: 500; letter-spacing: -0.01em; }
   .navlinks { display: flex; align-items: center; gap: 24px; }
   .navlinks a.l { font-size: 14px; color: var(--muted-fg); transition: color .15s; }
@@ -90,6 +90,37 @@
   @keyframes pulse { 50% { opacity: .4; } }
   .tile .t { font-family: var(--mono); font-size: 10px; color: var(--muted-fg); }
   .tile.live .t { color: color-mix(in oklch, var(--fg) 80%, transparent); }
+
+  /* Scotty UI mock (mirrors the real Qt app: header, sidebar, device rows) */
+  .scwin { background: #12151b; }
+  .scwin .mockbar { background: #12151b; border-bottom: 1px solid #2d333d; }
+  .scwin .mockbar .cap { color: #9aa3af; text-transform: none; letter-spacing: 0; font-weight: 500; }
+  .schdr { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: #12151b; }
+  .schdr .k { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #9aa3af; }
+  .schdr .v { font-size: 15px; color: #f3f4f6; font-weight: 500; margin-top: 3px; }
+  .scav { width: 34px; height: 34px; border-radius: 50%; background: var(--primary); color: #12151b; display: grid; place-items: center; font-weight: 700; font-size: 15px; }
+  .scbody { display: flex; background: #12151b; }
+  .scside { width: 40%; padding: 4px 20px 20px; display: flex; flex-direction: column; justify-content: space-between; gap: 22px; }
+  .scside .k { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: #9aa3af; margin-bottom: 9px; }
+  .scvis { display: flex; align-items: center; justify-content: space-between; background: #1b1f26; border: 1px solid #2d333d; border-radius: 9px; padding: 11px 13px; font-size: 14px; color: #f3f4f6; font-weight: 500; }
+  .scvis .chev { color: #9aa3af; font-size: 18px; }
+  .scdesc { font-size: 12px; color: #9aa3af; margin-top: 10px; line-height: 1.5; }
+  .scsend { display: flex; align-items: center; justify-content: center; gap: 8px; background: var(--primary); color: #12151b; border-radius: 9px; padding: 12px 14px; font-size: 14px; font-weight: 600; }
+  .scsend .plus { font-size: 18px; line-height: 1; }
+  .scmain { flex: 1; background: #1b1f26; border-top-left-radius: 28px; padding: 24px; min-height: 250px; }
+  .scmain .sch { font-size: 16px; font-weight: 500; color: #f3f4f6; margin: 0 0 16px; }
+  .scrow { display: flex; align-items: center; gap: 13px; background: #242932; border: 1px solid #2d333d; border-radius: 12px; padding: 13px; margin-bottom: 12px; }
+  .scrow:last-child { margin-bottom: 0; }
+  .scic { width: 40px; height: 40px; border-radius: 9px; background: #12151b; display: grid; place-items: center; color: #9aa3af; flex: none; }
+  .scic svg { width: 20px; height: 20px; }
+  .scrm { flex: 1; min-width: 0; }
+  .scrm .n { font-size: 14px; font-weight: 500; color: #f3f4f6; }
+  .scrm .s { font-size: 12px; color: #9aa3af; margin-top: 3px; }
+  .scrm .s.acc { color: var(--primary); }
+  .scprog { height: 5px; background: #12151b; border-radius: 3px; margin-top: 9px; overflow: hidden; }
+  .scprog i { display: block; height: 100%; width: 68%; background: var(--primary); }
+  .scbtn { background: var(--primary); color: #12151b; font-size: 13px; font-weight: 600; border-radius: 8px; padding: 7px 16px; flex: none; }
+  @media (max-width: 520px) { .scbody { flex-direction: column; } .scside { width: 100%; } .scmain { border-top-left-radius: 0; } }
 
   /* Features */
   .features { border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); background: color-mix(in oklch, var(--card) 20%, transparent); padding: 96px 0; }
@@ -179,28 +210,43 @@
     </div>
 
     <div>
-      <div class="mock" aria-hidden="true">
+      <div class="mock scwin" aria-hidden="true">
         <div class="mockbar">
           <div class="dots"><i></i><i></i><i></i></div>
-          <div class="cap">Scotty &mdash; Ready to share</div>
+          <div class="cap">Scotty</div>
           <div class="sp"></div>
         </div>
-        <div class="mockbody">
-          <div class="xfer">
-            <div class="l">
-              <div class="ic"><i></i></div>
-              <div>
-                <div class="fn">video.mp4</div>
-                <div class="fs">712 MB &bull; Sending, off network</div>
+        <div class="schdr">
+          <div class="scdev"><div class="k">Device name</div><div class="v">linux-pc</div></div>
+          <div class="scav">S</div>
+        </div>
+        <div class="scbody">
+          <div class="scside">
+            <div>
+              <div class="k">Visibility state</div>
+              <div class="scvis"><span>Everyone</span><span class="chev">&rsaquo;</span></div>
+              <div class="scdesc">Anyone nearby can share with you.</div>
+            </div>
+            <div class="scsend"><span class="plus">+</span> Send files</div>
+          </div>
+          <div class="scmain">
+            <div class="sch">Nearby devices</div>
+            <div class="scrow">
+              <div class="scic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="3" width="12" height="18" rx="2.5"/><path d="M10 18h4"/></svg></div>
+              <div class="scrm">
+                <div class="n">Android phone</div>
+                <div class="s acc">Sending&hellip; 68%</div>
+                <div class="scprog"><i></i></div>
               </div>
             </div>
-            <div class="pc">68%</div>
-          </div>
-          <div class="track"><i></i></div>
-          <div class="tiles">
-            <div class="tile on"><div class="d"></div><div class="t">Android phone</div></div>
-            <div class="tile live"><div class="d"></div><div class="t">Chromebook</div></div>
-            <div class="tile dash"><div class="t">Searching...</div></div>
+            <div class="scrow">
+              <div class="scic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="5" width="18" height="12" rx="1.5"/><path d="M2 20h20"/></svg></div>
+              <div class="scrm">
+                <div class="n">Chromebook</div>
+                <div class="s">Tap to send</div>
+              </div>
+              <div class="scbtn">Send</div>
+            </div>
           </div>
         </div>
       </div>
