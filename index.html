@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Scotty, Quick Share for Linux</title>
+<meta name="description" content="Native Google Quick Share for Linux. Send files to nearby Android and ChromeOS devices, on your network or fully off it.">
+<link rel="icon" href="icon.png">
+<style>
+  :root {
+    --bg: #ffffff; --text: #16181d; --muted: #6b7280; --line: #e6e8ec;
+    --accent: #2f6df6; --code-bg: #0f1115; --code-fg: #e8eaf0;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #0d0f13; --text: #edeef2; --muted: #9aa0ac; --line: #23262d;
+      --accent: #6d9bff; --code-bg: #06070a; --code-fg: #e8eaf0;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--text);
+    font: 16px/1.7 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  header { padding: 96px 0 8px; }
+  .logo { width: 64px; height: 64px; border-radius: 15px; }
+  h1 { font-size: 2rem; margin: 24px 0 10px; letter-spacing: -0.02em; }
+  .tag { font-size: 1.15rem; color: var(--muted); margin: 0; }
+
+  section { padding: 40px 0; border-top: 1px solid var(--line); margin-top: 40px; }
+  section:first-of-type { border-top: 0; margin-top: 0; }
+  h2 { font-size: 1.1rem; margin: 0 0 14px; letter-spacing: -0.01em; }
+  p { margin: 0 0 14px; }
+  .muted { color: var(--muted); }
+  ul { margin: 0; padding-left: 20px; }
+  li { margin: 6px 0; }
+
+  ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; }
+  ol.steps > li { counter-increment: s; margin: 0 0 18px; padding: 0; }
+  ol.steps > li .lbl { font-weight: 600; }
+  ol.steps > li .lbl::before { content: counter(s) ". "; color: var(--muted); font-weight: 400; }
+  pre {
+    background: var(--code-bg); color: var(--code-fg); border-radius: 10px; padding: 14px 16px;
+    overflow-x: auto; margin: 8px 0 0; font: 13.5px/1.55 "SF Mono","JetBrains Mono",Menlo,Consolas,monospace;
+  }
+  code { font-family: "SF Mono","JetBrains Mono",Menlo,Consolas,monospace; font-size: .92em; }
+
+  table { width: 100%; border-collapse: collapse; font-size: .95rem; }
+  th, td { text-align: left; padding: 10px 10px 10px 0; border-bottom: 1px solid var(--line); }
+  td.c, th.c { text-align: center; padding: 10px 6px; }
+  .yes { color: var(--accent); font-weight: 700; }
+  .tblwrap { overflow-x: auto; }
+
+  footer { padding: 48px 0 72px; color: var(--muted); font-size: .9rem; border-top: 1px solid var(--line); margin-top: 40px; }
+  footer p { margin: 6px 0; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <img class="logo" src="icon.png" alt="Scotty">
+    <h1>Scotty</h1>
+    <p class="tag">Native Google Quick Share for Linux.</p>
+  </header>
+
+  <section>
+    <p>Send and receive files with nearby Android and ChromeOS devices, using the sharing that is already built into them. No app on the other device, no account, no cloud.</p>
+    <p>What sets it apart: transfers work even with no shared Wi-Fi, and even with the phone's Wi-Fi switched off. Scotty reaches the phone over Bluetooth, opens a direct link, moves the files, and leaves your internet connection untouched throughout.</p>
+  </section>
+
+  <section>
+    <h2>Install with Flatpak</h2>
+    <ol class="steps">
+      <li><span class="lbl">Add the repository</span>
+        <pre>flatpak remote-add --if-not-exists scotty \
+  https://scottydev40.github.io/scotty.flatpakrepo</pre>
+      </li>
+      <li><span class="lbl">Install</span>
+        <pre>flatpak install scotty dev.scotty.Scotty</pre>
+      </li>
+      <li><span class="lbl">Run</span>
+        <pre>flatpak run dev.scotty.Scotty</pre>
+      </li>
+    </ol>
+    <p class="muted" style="margin-top:16px">Updates arrive automatically through <code>flatpak update</code>. The KDE runtime comes from Flathub, so <a href="https://flatpak.org/setup/">set that up first</a> if you have not. A self-updating AppImage is on the <a href="https://github.com/scottydev40/Scotty/releases">releases page</a> if you prefer a single file.</p>
+  </section>
+
+  <section>
+    <h2>Compared to the alternatives</h2>
+    <div class="tblwrap">
+    <table>
+      <thead>
+        <tr><th>&nbsp;</th><th class="c">Scotty</th><th class="c">Packet</th><th class="c">rquickshare</th><th class="c">LocalSend</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Google Quick Share</td><td class="c yes">Yes</td><td class="c">Yes</td><td class="c">Yes</td><td class="c muted">No</td></tr>
+        <tr><td>No app on the phone</td><td class="c yes">Yes</td><td class="c">Yes</td><td class="c">Yes</td><td class="c muted">No</td></tr>
+        <tr><td>Works with no shared Wi-Fi</td><td class="c yes">Yes</td><td class="c muted">No</td><td class="c muted">No</td><td class="c muted">No</td></tr>
+        <tr><td>Internet stays up mid-transfer</td><td class="c yes">Yes</td><td class="c muted">No</td><td class="c muted">No</td><td class="c muted">No</td></tr>
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>Source: <a href="https://github.com/scottydev40/Scotty">github.com/scottydev40/Scotty</a></p>
+    <p>An independent project, not affiliated with or endorsed by Google.</p>
+  </footer>
+
+</div>
+</body>
+</html>

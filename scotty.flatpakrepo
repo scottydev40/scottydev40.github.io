@@ -1,0 +1,8 @@
+[Flatpak Repo]
+Title=Scotty
+Url=https://scottydev40.github.io/repo/
+Homepage=https://scottydev40.github.io/
+Comment=Native Quick Share for Linux, including off-network transfers
+Description=Send and receive files with nearby Android/ChromeOS devices over Google Quick Share, on your network or fully off it (Wi-Fi disabled), with your internet staying up.
+Icon=https://scottydev40.github.io/icon.png
+GPGKey=mDMEapEdoRYJKwYBBAHaRw8BAQdAQLCB6dRIG7mC9CZy5668Lk/cZEIWj3nsdQX9PHsAUe60NlNjb3R0eSBSZWxlYXNlcyA8c2NvdHR5ZGV2NDBAdXNlcnMubm9yZXBseS5naXRodWIuY29tPoiQBBMWCgA4FiEE+1KT4OruZvtSNd4CePYIRLnB4/YFAmqRHaECGwMFCwkIBwIGFQoJCAsCBBYCAwECHgECF4AACgkQePYIRLnB4/acmAEA0seKWJALu0N86S3sCtKE38Yq2jIeKU8v0g2FmludscIA/AnEkI9oGkX7nqiFnCS/k4s29LCSoDOsuXptaEnDHqAA
