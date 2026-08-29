@@ -166,6 +166,34 @@
   .yes { color: var(--primary); font-weight: 500; }
   .no { color: var(--muted-fg); }
 
+  /* Screenshot frame (real app captures) */
+  .shot { border-radius: 12px; border: 1px solid var(--border); overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,.5); display: block; width: 100%; height: auto; background: #12151b; }
+  .heroshot { position: relative; }
+
+  /* Gallery */
+  .gallery { padding: 96px 0; border-top: 1px solid var(--border); }
+  .gallery h2 { font-size: 1.5rem; font-weight: 500; margin: 0 0 8px; text-align: center; }
+  .gallery .sub { text-align: center; color: var(--muted-fg); font-size: 15px; margin: 0 0 48px; }
+  .ggrid { display: grid; grid-template-columns: 1fr; gap: 32px; }
+  @media (min-width: 900px) { .ggrid { grid-template-columns: repeat(3, 1fr); } }
+  .gitem figcaption { margin-top: 14px; }
+  .gitem .gt { font-size: 15px; font-weight: 500; }
+  .gitem .gd { font-size: 13px; color: var(--muted-fg); margin-top: 3px; line-height: 1.5; }
+  .gitem { margin: 0; }
+
+  /* Transfer mediums */
+  .mediums { border-top: 1px solid var(--border); padding: 96px 0; background: color-mix(in oklch, var(--card) 20%, transparent); }
+  .mediums h2 { font-size: 1.5rem; font-weight: 500; margin: 0 0 8px; text-align: center; }
+  .mediums .sub { text-align: center; color: var(--muted-fg); font-size: 15px; margin: 0 auto 48px; max-width: 60ch; }
+  .ladder { max-width: 820px; margin: 0 auto; display: flex; flex-direction: column; gap: 14px; }
+  .rung { display: grid; grid-template-columns: 44px 1fr auto; gap: 18px; align-items: center; background: var(--bg); border: 1px solid var(--border); border-radius: 10px; padding: 18px 20px; }
+  .rung .num { font-family: var(--mono); font-size: 13px; color: var(--primary); width: 44px; height: 44px; border-radius: 8px; border: 1px solid color-mix(in oklch, var(--primary) 25%, transparent); background: color-mix(in oklch, var(--primary) 8%, transparent); display: grid; place-items: center; }
+  .rung .rn { font-size: 15px; font-weight: 500; }
+  .rung .rd { font-size: 13px; color: var(--muted-fg); margin-top: 3px; max-width: 60ch; line-height: 1.5; }
+  .rung .tag { font-family: var(--mono); font-size: 10px; text-transform: uppercase; letter-spacing: .1em; color: var(--muted-fg); border: 1px solid var(--border); border-radius: 999px; padding: 5px 12px; white-space: nowrap; }
+  .rung .tag.hot { color: var(--primary); border-color: color-mix(in oklch, var(--primary) 40%, transparent); }
+  @media (max-width: 560px) { .rung { grid-template-columns: 36px 1fr; } .rung .tag { grid-column: 2; justify-self: start; } .rung .num { width: 36px; height: 36px; } }
+
   /* Footer */
   footer { border-top: 1px solid color-mix(in oklch, var(--border) 50%, transparent); padding: 48px 0; }
   footer .row { display: flex; flex-direction: column; align-items: center; gap: 24px; }
@@ -197,7 +225,7 @@
   <div class="wrap herogrid">
     <div>
       <h1>A Quick Share client for Linux</h1>
-      <p class="lede">Send files between your Linux PC and nearby Android or ChromeOS devices over Quick Share, the sharing already built into them. No accounts, no cloud. And it works even when there is no shared Wi-Fi at all.</p>
+      <p class="lede">Send files between your Linux PC and nearby Android or ChromeOS devices over Quick Share, the sharing already built into them. No account required, no cloud. And it works even when there is no shared Wi-Fi at all.</p>
       <div class="cta">
         <a class="btn pri" href="#install">Install for Linux</a>
         <a class="btn sec" href="https://github.com/scottydev40/Scotty">Source Code</a>
@@ -208,36 +236,33 @@
       </div>
     </div>
 
-    <div>
-      <div class="mock scwin" aria-hidden="true">
-        <div class="mockbar">
-          <div class="wctl-sp"></div>
-          <div class="cap">Scotty</div>
-          <div class="wctl"><s></s><s></s><s></s></div>
-        </div>
-        <div class="schdr">
-          <div class="scdev"><div class="k">Device name</div><div class="v">linux-pc</div></div>
-          <div class="scav">S</div>
-        </div>
-        <div class="scbody">
-          <div class="scside">
-            <div>
-              <div class="k">Visibility state</div>
-              <div class="scvis sel"><span>Everyone</span><span class="chev">&rsaquo;</span></div>
-              <div class="scdesc">Any nearby device can find you and share files with you.</div>
-            </div>
-            <div>
-              <div class="scsend"><span class="plus">+</span> Send files</div>
-              <div class="scdrop">&hellip;or drop files anywhere in the window.</div>
-            </div>
-          </div>
-          <div class="scmain">
-            <div class="sch">Ready to receive</div>
-            <div class="scblob"><span></span><span></span></div>
-            <div class="scready">Ready to receive</div>
-          </div>
-        </div>
-      </div>
+    <div class="heroshot">
+      <img class="shot" src="shot-send.png" width="2004" height="1640"
+           alt="Scotty sending a file: nearby devices grouped into Your devices &amp; contacts and Everyone else, with a scan-to-connect QR code and the signed-in account menu open.">
+    </div>
+  </div>
+</section>
+
+<section id="screens" class="gallery">
+  <div class="wrap">
+    <h2>A proper desktop app, not a terminal tool</h2>
+    <p class="sub">Native Qt, in your system tray, themed to match your desktop.</p>
+    <div class="ggrid">
+      <figure class="gitem">
+        <img class="shot" src="shot-home.png" width="2004" height="1640"
+             alt="Scotty idle on its home screen showing 'Ready to receive' with the visibility set to Everyone.">
+        <figcaption><div class="gt">Ready to receive</div><div class="gd">Pick who can see you &mdash; Everyone, Contacts, your own devices, or no one &mdash; and drop files anywhere to send.</div></figcaption>
+      </figure>
+      <figure class="gitem">
+        <img class="shot" src="shot-send.png" width="2004" height="1640"
+             alt="Scotty's send list grouped into Your devices &amp; contacts and Everyone else, with a QR code and account menu.">
+        <figcaption><div class="gt">Know who you're sending to</div><div class="gd">Signed in, the list separates your own devices and contacts from strangers nearby. A QR code lets any phone connect with no app.</div></figcaption>
+      </figure>
+      <figure class="gitem">
+        <img class="shot" src="shot-receive.png" width="2004" height="1640"
+             alt="Scotty receiving a file from a phone, showing live transfer progress and speed.">
+        <figcaption><div class="gt">Live transfers</div><div class="gd">Incoming and outgoing files show real progress and speed, and land even when your screen is locked.</div></figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -251,6 +276,38 @@
       <div class="fcard"><h3>Lives in your tray</h3><p>Tucked into the system tray. One click to toggle who can see you, or to accept an incoming transfer the moment it arrives.</p></div>
       <div class="fcard"><h3>Locked-screen receive</h3><p>Files land even when your screen is locked, with your certificates in place, so you never miss a transfer because you stepped away.</p></div>
       <div class="fcard"><h3>Scan to send</h3><p>A built-in QR code lets any phone send files straight to you, with no Scotty and no setup needed on the other side.</p></div>
+      <div class="fcard"><h3>Boost mode</h3><p>Off the network, opt into a 5&nbsp;GHz hotspot link for big transfers &mdash; roughly 75&nbsp;MB/s instead of 20. Off by default; flip it on when you are moving a lot at once.</p></div>
+      <div class="fcard"><h3>Follows your desktop</h3><p>Scotty reads your system accent colour and light or dark theme from the desktop portal and matches it, so it looks like it belongs &mdash; not like a foreign toolkit.</p></div>
+      <div class="fcard"><h3>Optional My&nbsp;Devices account</h3><p>Sign in with Google to send to your own devices without a tap and to see contacts, with your real name and photo. It runs as a separate plugin, so the core app stays completely account-free.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="mediums" class="mediums">
+  <div class="wrap">
+    <h2>It picks the best path it can reach</h2>
+    <p class="sub">Scotty negotiates the same set of radios Quick Share uses, and upgrades to the fastest link both devices can share &mdash; with or without a network in common.</p>
+    <div class="ladder">
+      <div class="rung">
+        <div class="num">1</div>
+        <div><div class="rn">Wi-Fi LAN</div><div class="rd">Both devices on the same Wi-Fi &mdash; the fastest path, straight across the local network.</div></div>
+        <div class="tag">Fastest</div>
+      </div>
+      <div class="rung">
+        <div class="num">2</div>
+        <div><div class="rn">Wi-Fi Direct &amp; hotspot</div><div class="rd">No shared network needed: the two devices open a direct Wi-Fi link between themselves. Boost mode runs this on 5&nbsp;GHz for big transfers.</div></div>
+        <div class="tag hot">Off-network</div>
+      </div>
+      <div class="rung">
+        <div class="num">3</div>
+        <div><div class="rn">Bluetooth Classic</div><div class="rd">Reaches the phone with no Wi-Fi in common at all &mdash; even with its Wi-Fi off &mdash; and bootstraps the direct high-speed link above.</div></div>
+        <div class="tag hot">Off-network</div>
+      </div>
+      <div class="rung">
+        <div class="num">4</div>
+        <div><div class="rn">Bluetooth LE</div><div class="rd">Finds nearby devices and their Quick Share advertisements, on the network or off it, so discovery keeps working when there is no Wi-Fi.</div></div>
+        <div class="tag">Discovery</div>
+      </div>
     </div>
   </div>
 </section>
@@ -298,8 +355,10 @@ chmod +x Scotty.AppImage
       <h2>Common Questions</h2>
       <div class="qa">
         <div><h4>Does this work with iPhone?</h4><p>No. Scotty speaks Google Quick Share, the Android and ChromeOS standard. iPhones use AirDrop, a separate protocol, so they are not supported today.</p></div>
-        <div><h4>Which desktop environments are supported?</h4><p>It is built and tested on GNOME and KDE Plasma, but Scotty is a standalone Qt application and runs on any X11 or Wayland based compositor.</p></div>
-        <div><h4>Do my files go through a server?</h4><p>No. Transfers happen directly between the two devices over your local radios. The optional account feature, for sending to your own signed-in devices, talks to Google's servers; everything else is fully local.</p></div>
+        <div><h4>Which desktop environments are supported?</h4><p>It is built and tested on GNOME (including Ubuntu) and KDE Plasma, but Scotty is a standalone Qt application and runs on any X11 or Wayland based compositor.</p></div>
+        <div><h4>Will the tray icon show up on GNOME?</h4><p>On Ubuntu, yes &mdash; it ships the AppIndicator extension that GNOME needs for tray icons, so Scotty appears out of the box. On a stock GNOME desktop (for example Fedora Workstation), enable the &ldquo;AppIndicator and KStatusNotifierItem Support&rdquo; extension once and the tray icon shows up. KDE Plasma and most other desktops support it natively.</p></div>
+        <div><h4>Do I need a Google account?</h4><p>No. Everything &mdash; discovery, sending, receiving, off-network transfers &mdash; works signed out. Signing in is an optional plugin that adds sending to your own devices with no confirmation tap, contacts, and your real name and photo. It is a separate process, so the core app never touches an account unless you choose to.</p></div>
+        <div><h4>Do my files go through a server?</h4><p>No. Transfers happen directly between the two devices over your local radios. Only the optional account plugin, for signing in and syncing your own devices' certificates, talks to Google's servers; every file transfer itself is fully local.</p></div>
         <div><h4>How do I get updates?</h4><p>The Flatpak updates automatically through <code>flatpak update</code> and your software centre. The AppImage checks for and installs updates from inside the app.</p></div>
       </div>
     </div>
