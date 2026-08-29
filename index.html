@@ -251,7 +251,7 @@
       <figure class="gitem">
         <img class="shot" src="shot-home.png" width="2004" height="1640"
              alt="Scotty idle on its home screen showing 'Ready to receive' with the visibility set to Everyone.">
-        <figcaption><div class="gt">Ready to receive</div><div class="gd">Pick who can see you &mdash; Everyone, Contacts, your own devices, or no one &mdash; and drop files anywhere to send.</div></figcaption>
+        <figcaption><div class="gt">Ready to receive</div><div class="gd">Pick who can see you (Everyone, Contacts, your own devices, or no one), and drop files anywhere to send.</div></figcaption>
       </figure>
       <figure class="gitem">
         <img class="shot" src="shot-send.png" width="2004" height="1640"
@@ -276,8 +276,8 @@
       <div class="fcard"><h3>Lives in your tray</h3><p>Tucked into the system tray. One click to toggle who can see you, or to accept an incoming transfer the moment it arrives.</p></div>
       <div class="fcard"><h3>Locked-screen receive</h3><p>Files land even when your screen is locked, with your certificates in place, so you never miss a transfer because you stepped away.</p></div>
       <div class="fcard"><h3>Scan to send</h3><p>A built-in QR code lets any phone send files straight to you, with no Scotty and no setup needed on the other side.</p></div>
-      <div class="fcard"><h3>Boost mode</h3><p>Off the network, opt into a 5&nbsp;GHz hotspot link for big transfers &mdash; roughly 75&nbsp;MB/s instead of 20. Off by default; flip it on when you are moving a lot at once.</p></div>
-      <div class="fcard"><h3>Follows your desktop</h3><p>Scotty reads your system accent colour and light or dark theme from the desktop portal and matches it, so it looks like it belongs &mdash; not like a foreign toolkit.</p></div>
+      <div class="fcard"><h3>Boost mode</h3><p>Off the network, opt into a 5&nbsp;GHz hotspot link for big transfers: roughly 75&nbsp;MB/s instead of 20. Off by default; flip it on when you are moving a lot at once.</p></div>
+      <div class="fcard"><h3>Follows your desktop</h3><p>Scotty reads your system accent colour and light or dark theme from the desktop portal and matches it, so it looks like it belongs, not like a foreign toolkit.</p></div>
       <div class="fcard"><h3>Optional My&nbsp;Devices account</h3><p>Sign in with Google to send to your own devices without a tap and to see contacts, with your real name and photo. It runs as a separate plugin, so the core app stays completely account-free.</p></div>
     </div>
   </div>
@@ -286,11 +286,11 @@
 <section id="mediums" class="mediums">
   <div class="wrap">
     <h2>It picks the best path it can reach</h2>
-    <p class="sub">Scotty negotiates the same set of radios Quick Share uses, and upgrades to the fastest link both devices can share &mdash; with or without a network in common.</p>
+    <p class="sub">Scotty negotiates the same set of radios Quick Share uses, and upgrades to the fastest link both devices can share, with or without a network in common.</p>
     <div class="ladder">
       <div class="rung">
         <div class="num">1</div>
-        <div><div class="rn">Wi-Fi LAN</div><div class="rd">Both devices on the same Wi-Fi &mdash; the fastest path, straight across the local network.</div></div>
+        <div><div class="rn">Wi-Fi LAN</div><div class="rd">Both devices on the same Wi-Fi: the fastest path, straight across the local network.</div></div>
         <div class="tag">Fastest</div>
       </div>
       <div class="rung">
@@ -300,7 +300,7 @@
       </div>
       <div class="rung">
         <div class="num">3</div>
-        <div><div class="rn">Bluetooth Classic</div><div class="rd">Reaches the phone with no Wi-Fi in common at all &mdash; even with its Wi-Fi off &mdash; and bootstraps the direct high-speed link above.</div></div>
+        <div><div class="rn">Bluetooth Classic</div><div class="rd">Reaches the phone with no Wi-Fi in common at all, even with its Wi-Fi off, and bootstraps the direct high-speed link above.</div></div>
         <div class="tag hot">Off-network</div>
       </div>
       <div class="rung">
@@ -317,7 +317,7 @@
     <div class="box">
       <h2>Install Scotty</h2>
       <div class="method">
-        <div class="mhead"><span class="ml">Flatpak &mdash; auto-updating</span><button class="copy" data-copy="flatpak remote-add --if-not-exists scotty https://scottydev40.github.io/scotty.flatpakrepo
+        <div class="mhead"><span class="ml">Flatpak (auto-updating)</span><button class="copy" data-copy="flatpak remote-add --if-not-exists scotty https://scottydev40.github.io/scotty.flatpakrepo
 flatpak install scotty dev.scotty.Scotty">Copy</button></div>
         <div class="code"><div><span class="p">$ </span>flatpak remote-add --if-not-exists scotty https://scottydev40.github.io/scotty.flatpakrepo</div><div><span class="p">$ </span>flatpak install scotty dev.scotty.Scotty</div></div>
       </div>
@@ -356,8 +356,8 @@ chmod +x Scotty.AppImage
       <div class="qa">
         <div><h4>Does this work with iPhone?</h4><p>No. Scotty speaks Google Quick Share, the Android and ChromeOS standard. iPhones use AirDrop, a separate protocol, so they are not supported today.</p></div>
         <div><h4>Which desktop environments are supported?</h4><p>It is built and tested on GNOME (including Ubuntu) and KDE Plasma, but Scotty is a standalone Qt application and runs on any X11 or Wayland based compositor.</p></div>
-        <div><h4>Will the tray icon show up on GNOME?</h4><p>On Ubuntu, yes &mdash; it ships the AppIndicator extension that GNOME needs for tray icons, so Scotty appears out of the box. On a stock GNOME desktop (for example Fedora Workstation), enable the &ldquo;AppIndicator and KStatusNotifierItem Support&rdquo; extension once and the tray icon shows up. KDE Plasma and most other desktops support it natively.</p></div>
-        <div><h4>Do I need a Google account?</h4><p>No. Everything &mdash; discovery, sending, receiving, off-network transfers &mdash; works signed out. Signing in is an optional plugin that adds sending to your own devices with no confirmation tap, contacts, and your real name and photo. It is a separate process, so the core app never touches an account unless you choose to.</p></div>
+        <div><h4>Will the tray icon show up on GNOME?</h4><p>On Ubuntu, yes: it ships the AppIndicator extension that GNOME needs for tray icons, so Scotty appears out of the box. On a stock GNOME desktop (for example Fedora Workstation), enable the &ldquo;AppIndicator and KStatusNotifierItem Support&rdquo; extension once and the tray icon shows up. KDE Plasma and most other desktops support it natively.</p></div>
+        <div><h4>Do I need a Google account?</h4><p>No. Everything (discovery, sending, receiving, off-network transfers) works signed out. Signing in is an optional plugin that adds sending to your own devices with no confirmation tap, contacts, and your real name and photo. It is a separate process, so the core app never touches an account unless you choose to.</p></div>
         <div><h4>Do my files go through a server?</h4><p>No. Transfers happen directly between the two devices over your local radios. Only the optional account plugin, for signing in and syncing your own devices' certificates, talks to Google's servers; every file transfer itself is fully local.</p></div>
         <div><h4>How do I get updates?</h4><p>The Flatpak updates automatically through <code>flatpak update</code> and your software centre. The AppImage checks for and installs updates from inside the app.</p></div>
       </div>
